@@ -1,0 +1,16 @@
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+  "email":"jana@jana.com",
+  "password": "test123"
+}
+
+###
+POST http://localhost:3000/api/v1/users/generate_token
+Content-Type: application/json
+
+{
+  "email":"jana@jana.com",
+  "password": "test123"
+}

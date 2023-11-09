@@ -1,0 +1,319 @@
+basePath: /api/v1
+definitions:
+  entity.Manga:
+    properties:
+      description:
+        type: string
+      final_date:
+        type: string
+      finished:
+        type: boolean
+      id:
+        type: string
+      initial_date:
+        type: string
+      title:
+        type: string
+    type: object
+  usecase.GenerateTokenUserOutputDTO:
+    properties:
+      access_token:
+        type: string
+    type: object
+  webserver.CreateUserInputDTO:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  webserver.GetUserTokenInputDTO:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  webserver.MangaErrorOutputDTO:
+    properties:
+      message:
+        type: string
+    type: object
+  webserver.RegisterMangaInputDTO:
+    properties:
+      description:
+        type: string
+      final_date:
+        type: string
+      finished:
+        type: boolean
+      initial_date:
+        type: string
+      title:
+        type: string
+    type: object
+  webserver.UserErrorOutputDTO:
+    properties:
+      message:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: Manager mangas
+  title: Manga API
+  version: "1.0"
+paths:
+  /mangas:
+    get:
+      consumes:
+      - application/json
+      description: get all mangas
+      parameters:
+      - description: page number
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Manga'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+      security:
+      - BearerAuth: []
+      summary: get all mangas
+      tags:
+      - mangas
+    post:
+      consumes:
+      - application/json
+      description: register a new manga
+      parameters:
+      - description: manga request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/webserver.RegisterMangaInputDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+      security:
+      - BearerAuth: []
+      summary: register a new manga
+      tags:
+      - mangas
+  /mangas/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: remove a manga
+      parameters:
+      - description: manga id
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+      security:
+      - BearerAuth: []
+      summary: remove a manga
+      tags:
+      - mangas
+    get:
+      consumes:
+      - application/json
+      description: get a manga by id
+      parameters:
+      - description: manga id
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Manga'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+      security:
+      - BearerAuth: []
+      summary: get a manga by id
+      tags:
+      - mangas
+    patch:
+      consumes:
+      - application/json
+      description: update a manga
+      parameters:
+      - description: manga request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Manga'
+      - description: manga id
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/webserver.MangaErrorOutputDTO'
+      security:
+      - BearerAuth: []
+      summary: update a manga
+      tags:
+      - mangas
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user
+      parameters:
+      - description: user request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/webserver.CreateUserInputDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/webserver.UserErrorOutputDTO'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/webserver.UserErrorOutputDTO'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/webserver.UserErrorOutputDTO'
+      summary: Create a new user
+      tags:
+      - users
+  /users/generate_token:
+    post:
+      consumes:
+      - application/json
+      description: get a token
+      parameters:
+      - description: user request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/webserver.GetUserTokenInputDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/usecase.GenerateTokenUserOutputDTO'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/webserver.UserErrorOutputDTO'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/webserver.UserErrorOutputDTO'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/webserver.UserErrorOutputDTO'
+      summary: get a token
+      tags:
+      - users
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

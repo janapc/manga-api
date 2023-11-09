@@ -1,0 +1,40 @@
+POST http://localhost:3000/api/v1/mangas
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTk2NDI4NTgsInN1YiI6IjE5NzdhOTE2LTJmZmYtNDBlYS1hOTEyLWI4MTc0NTc2YTdlZCJ9.F6NgZpm0fUZPC85dsB7bL8dgzunLu9NSJwG3b4RQ6Qw
+
+{
+  "description": "Bleach is manga about stranges creatures",
+  "initial_date": "09/01/1990",
+  "title": "Bleach 3",
+  "final_date": "29/05/2006",
+  "finished": true
+}
+
+###
+
+GET http://localhost:3000/api/v1/mangas/7fbe749c-d4c0-4962-bea0-514b02c7d5ab
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTk2NDI4NTgsInN1YiI6IjE5NzdhOTE2LTJmZmYtNDBlYS1hOTEyLWI4MTc0NTc2YTdlZCJ9.F6NgZpm0fUZPC85dsB7bL8dgzunLu9NSJwG3b4RQ6Qw
+
+###
+
+GET http://localhost:3000/api/v1/mangas?limit=3&page=1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTk2NDI4NTgsInN1YiI6IjE5NzdhOTE2LTJmZmYtNDBlYS1hOTEyLWI4MTc0NTc2YTdlZCJ9.F6NgZpm0fUZPC85dsB7bL8dgzunLu9NSJwG3b4RQ6Qw
+
+###
+
+PATCH  http://localhost:3000/api/v1/mangas/7fbe749c-d4c0-4962-bea0-514b02c7d5aa
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTk2NDI4NTgsInN1YiI6IjE5NzdhOTE2LTJmZmYtNDBlYS1hOTEyLWI4MTc0NTc2YTdlZCJ9.F6NgZpm0fUZPC85dsB7bL8dgzunLu9NSJwG3b4RQ6Qw
+
+{
+  "initial_date": "10/11/2006",
+  "title": "Bleach"
+}
+
+###
+
+DELETE  http://localhost:3000/api/v1/mangas/7fbe749c-d4c0-4962-bea0-514b02c7d5aa
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTk2NDI4NTgsInN1YiI6IjE5NzdhOTE2LTJmZmYtNDBlYS1hOTEyLWI4MTc0NTc2YTdlZCJ9.F6NgZpm0fUZPC85dsB7bL8dgzunLu9NSJwG3b4RQ6Qw
