@@ -19,12 +19,6 @@ jobs:
       - name: Run go vet
         run: go vet ./...
 
-      - name: Install golint
-        run: go install golang.org/x/lint/golint@latest
-
-      - name: Run golint
-        run: golint ./...
-
       - name: Unit tests
         run: |
           sudo go test ./... -coverprofile coverage.out -covermode count
